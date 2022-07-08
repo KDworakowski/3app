@@ -3,6 +3,9 @@ import pika
 import json
 import config as cfg
 
+import redis
+from redis.commands.json.path import Path
+
 # Connect to RabbitMQ and create channel
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
 channel = connection.channel()
@@ -25,3 +28,17 @@ def callback(ch, method, properties, body):
 # Listen and receive data from queue
 channel.basic_consume(cfg.QUEUE_TOPIC, callback, auto_ack=True)
 channel.start_consuming()
+
+
+client = redis.Redis(host='localhost', port=6379, db=0)
+
+jane = {
+     'name': "Jane",
+     'Age': 33,
+     'Location': "Chawton"
+   }
+
+client.json().set('id:1', Path.root_path(), "1")
+
+result = client.json().get('person:1')
+print(result)
