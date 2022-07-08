@@ -3,9 +3,6 @@ import pika
 import json
 import config as cfg
 
-import redis
-from redis.commands.json.path import Path
-
 # Connect to RabbitMQ and create channel
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
 channel = connection.channel()
