@@ -2,8 +2,10 @@
 import pika
 import json
 import config as cfg
+import jsonschema
 from jsonschema import validate
 
+import requests
 
 
 # Connect to RabbitMQ and create channel
@@ -13,32 +15,23 @@ channel = connection.channel()
 # Declare queue to send data
 channel.queue_declare(queue=cfg.QUEUE_TOPIC)
 
-# JSON
 data = {
         "id": "1",
         "name": "My Name",
-        "description": "This is description about me"
+        "description": 1
     }
-
-# Schema for JSON Validating
-schema = {
-    "type" : "object",
-    "properties" : {
-        "id" : {"type" : "string"},
-        "name" : {"type" : "string"},
-        "description" : {"type" : "string"},
-    },
-}
-
-#Validate json
-validate(instance=data, schema=schema)
-print(data)
 
 # Convert python object to JSON
 message = json.dumps(data)
+response = requests.post('https://httpbin.org/post', json=message)
 
 
-# Send data
+
+
 channel.basic_publish(exchange='', routing_key=cfg.QUEUE_TOPIC, body=message)
 print(" [x] Sent data to RabbitMQ")
 connection.close()
+
+print("Status code: ", response.status_code)
+print("Printing Entire Post Request")
+print(response.json())
