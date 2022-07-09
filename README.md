@@ -1,5 +1,5 @@
 # 3app
-
+![Optional Text](../master/docs/docs.drawio.png)
 ## RabbitMQ Installation
 You can install it using any package manager like apt or brew on macOS.
 
@@ -13,11 +13,10 @@ export PATH=$PATH:$HOMEBREW_RABBITMQ
 ```
 **IMPORTANT: Location of the homebrew may be different on your device, you can also try /usr/local/Cellar/rabbitmq/(version)/sbin/**
 
-Then simply run `rabbitmq-server`, default username and passwords are guest
+Then simply run `rabbitmq-server` or `homebrew services start rabbitmq`, default username and passwords are guest
 
-## Redis Installation
-You can install it using any package manager like apt or brew on macOS.
-Then simply run `rabbitmq-server`
+## HTTPBIN
+to run HTTP Bin simply run the command `docker run -p 80:80 kennethreitz/httpbin`
 ## ERRORS
 In case of any errors, plase make sure you have the correct version of the packages listed in `requirements.txt`.
 Since pika has changed their arguments u can expect errors on older versions.
