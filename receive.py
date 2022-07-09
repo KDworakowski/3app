@@ -8,7 +8,7 @@ import pymongo
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 db = myclient.database_sample
-empinfo=db.database_sample
+my_collection = db["database"]
 
 # Connect to RabbitMQ and create channel
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
@@ -28,7 +28,7 @@ def callback(ch, method, properties, body):
     print("ID: {}".format(data['id']))
     print("Name: {}".format(data['name']))
     print('Description: {}'.format(data['description']))
-    empinfo.insert_one(data)
+    my_collection.insert_one(data)
 
 # Listen and receive data from queue
 channel.basic_consume(cfg.QUEUE_TOPIC, callback, auto_ack=True)
