@@ -2,9 +2,8 @@
 FROM python:3.7
 
 # install pika to access rabbitmq
-RUN pip install pika
 RUN pip install pymongo
-RUN pip install json
+RUN pip install pika
 
 # Without this setting, Python never prints anything out.
 ENV PYTHONUNBUFFERED=1

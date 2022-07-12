@@ -1,6 +1,14 @@
 import pika
 import time
 import os
+import pymongo
+import json
+
+# Create a connection to MongoDB and create DB
+
+myclient = pymongo.MongoClient("mongo:27017", username='root', password='password')
+db = myclient.database_sample
+my_collection = db["database"]
 
 # read rabbitmq connection url from environment variable
 amqp_url = os.environ['AMQP_URL']
@@ -21,15 +29,17 @@ def receive_msg(ch, method, properties, body):
     print it
     sleep for 2 seconds
     ack the message"""
-
     print('received msg : ', body.decode('utf-8'))
     time.sleep(2)
     print('acking it')
     ch.basic_ack(delivery_tag=method.delivery_tag)
+    data = json.loads(body)
+    my_collection.insert_one(data)
 
 
 # to make sure the consumer receives only one message at a time
 # next message is received only after acking the previous one
+
 chan.basic_qos(prefetch_count=1)
 
 # define the queue consumption
