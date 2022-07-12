@@ -2,8 +2,6 @@
 import pika
 import json
 import config as cfg
-import jsonschema
-from jsonschema import validate
 
 import requests
 
