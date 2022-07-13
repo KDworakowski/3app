@@ -11,7 +11,7 @@ db = myclient.database_sample
 my_collection = db["database"]
 
 # Connect to RabbitMQ and create channel
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST, port=cfg.PORT))
 channel = connection.channel()
 
 # Declare and listen queue

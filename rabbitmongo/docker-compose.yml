@@ -1,19 +1,11 @@
 version: '3'
 services:
-  mp-mongodb:
-    container_name: mp-mongodb
-    image: mongo:3.6
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_DATA_DIR: /data/db
-      MONGO_LOG_DIR: /dev/null
-    volumes:
-      - mongo-data:/data/db
+  mongodb:
+    image: mongo:5.0
     ports:
-      - "27017:27017"
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
     networks:
       - test-network
   rabbitmq:
@@ -26,7 +18,7 @@ services:
     networks:
       - test-network
     depends_on:
-      - mp-mongodb
+      - mongodb
 volumes:
   mongo-data:
 networks:

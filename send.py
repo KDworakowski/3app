@@ -7,7 +7,7 @@ import requests
 
 
 # Connect to RabbitMQ and create channel
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=cfg.RABBIT_HOST, port=cfg.PORT))
 channel = connection.channel()
 
 # Declare queue to send data
