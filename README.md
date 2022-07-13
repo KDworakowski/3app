@@ -33,10 +33,13 @@ After you installed all requirements and turned on HTTPBIN you should first run 
 Then you can send request using `./send.py` command. If you want to check the amount of object in the MongoDB database simply run `./getSize.py` command.
 
 If you'll have any permissions issues try changing the files permissions using [chmod](https://linuxcommand.org/lc3_man_pages/chmod1.html).
-## Run App in Docker
-
-Then run HTTP Bin using `docker run -p 80:80 kennethreitz/httpbin` command.
-docker image build -t receive .  
+## Docker
+### Turn On RabiitMQ and MongoDB in docker
+```
+cd /rabbitmongo
+docker-compose up
+```
+To view MongoDB for example in TablePlus use `mongodb://127.0.0.1:27017/database_sample`
 ## ERRORS
 In case of any errors, plase make sure you have the correct version of the packages listed in `requirements.txt`.
 Since pika has changed their arguments u can expect errors on older versions.
