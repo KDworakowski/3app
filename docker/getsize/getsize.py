@@ -3,7 +3,8 @@ import pymongo
 
 # Create a connection to MongoDB and create DB
 
-myclient = pymongo.MongoClient("mongo:27017", username='root', password='password')
+# myclient = pymongo.MongoClient("mongo:27017", username='root', password='password')
+myclient = pymongo.MongoClient('localhost', port=27017)
 db = myclient.database_sample
 my_collection = db["database"]
 
