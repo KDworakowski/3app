@@ -6,7 +6,7 @@ import json
 
 # Create a connection to MongoDB and create DB
 
-myclient = pymongo.MongoClient("mongodb://root:password@mongo:27017/?authSource=admin")
+myclient = pymongo.MongoClient("mongodb://root:password@mongo:27017/?ssl=false&authSource=admin")
 db = myclient.database_sample
 my_collection = db["database"]
 
