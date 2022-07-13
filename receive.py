@@ -29,6 +29,7 @@ def callback(ch, method, properties, body):
     print("Name: {}".format(data['name']))
     print('Description: {}'.format(data['description']))
     my_collection.insert_one(data)
+    print("Data sent to MongoDB:")
 
 # Listen and receive data from queue
 channel.basic_consume(cfg.QUEUE_TOPIC, callback, auto_ack=True)
