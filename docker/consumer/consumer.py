@@ -35,6 +35,7 @@ def receive_msg(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
     data = json.loads(body)
     my_collection.insert_one(data)
+    print("DATA INSERTED TO MONGO: ", data)
 
 
 # to make sure the consumer receives only one message at a time

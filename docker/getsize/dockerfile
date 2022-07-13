@@ -3,20 +3,15 @@ FROM python:3.7
 
 # install pika to access rabbitmq
 RUN pip install pymongo
-RUN pip install pika
-# RUN rm /var/lib/mongodb/mongod.lock
-# RUN mongod --repair
-# RUN service mongodb start
-# RUN service mongodb status
 
 # Without this setting, Python never prints anything out.
 ENV PYTHONUNBUFFERED=1
 
 # declare the source directory
-WORKDIR /usr/src/app/consumer
+WORKDIR /usr/src/app/getsize
 
 # copy the file
-COPY consumer.py .
+COPY getsize.py .
 
 # start command
-CMD [ "python", "consumer.py" ]
+CMD [ "python", "getsize.py" ]

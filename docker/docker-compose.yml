@@ -14,6 +14,7 @@ services:
       # Sample data comes from:
       # https://github.com/mistertandon/node-express-hbs/blob/master/movies_collection.json
       - ./mongo:/docker-entrypoint-initdb.d
+
   # rabbit_mq container uses the default rabbitmq image
   # exposes the ports
   # uses the specified volume
@@ -67,6 +68,13 @@ services:
         AMQP_URL: 'amqp://rabbit_mq?connection_attempts=10&retry_delay=10'
     volumes:
       - ./consumer:/usr/src/app/consumer
+  getsize:
+    build: getsize
+    depends_on:
+        - mongo
+        - rabbit_mq
+    volumes:
+      - ./getsize:/usr/src/app/getsize
 volumes:
     rabbit_mqdata:
       driver: local
