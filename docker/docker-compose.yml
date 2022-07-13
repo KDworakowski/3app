@@ -68,13 +68,13 @@ services:
         AMQP_URL: 'amqp://rabbit_mq?connection_attempts=10&retry_delay=10'
     volumes:
       - ./consumer:/usr/src/app/consumer
-  getsize:
-    build: getsize
-    depends_on:
-        - mongo
-        - rabbit_mq
-    volumes:
-      - ./getsize:/usr/src/app/getsize
+  # getsize:
+  #   build: getsize
+  #   depends_on:
+  #       - mongo
+  #       - rabbit_mq
+  #   volumes:
+  #     - ./getsize:/usr/src/app/getsize
 volumes:
     rabbit_mqdata:
       driver: local
